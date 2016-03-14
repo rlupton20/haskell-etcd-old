@@ -1,0 +1,8 @@
+# Text file editing nonsense
+*~
+*#
+
+# Haskell development stuff
+.cabal-sandbox
+cabal.sandbox.config
+dist
