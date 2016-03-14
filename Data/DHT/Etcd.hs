@@ -28,15 +28,21 @@ extract = return . decode . fromString
 --   it does no parsing, and returns the entire body sent as a result of the HTTP
 --   GET request as a String
 getRaw :: Etcd -> Key -> IO String
-getRaw Etcd{..} key = simpleHTTP (getRequest $ "http://" ++ restAddress ++ "/v2/keys" ++ key) >>= getResponseBody
+getRaw etcd key = getFlexiRaw etcd key
 
 -- | get queries an etcd instance for the value stored at a key. The return value
 --   is obtained by trying to parse with a FromJSON instance (either inferred, or
 --   specified explicitly.
 get :: (FromJSON a) => Etcd -> Key -> IO (Maybe a)
-get etcd key = do
-  getRaw etcd key >>= extract
+get etcd key = getRaw etcd key >>= extract
 
+
+-- | getFlexiRaw allows for more specific get requests
+getFlexiRaw :: Etcd -> String -> IO String
+getFlexiRaw Etcd{..} urlext = simpleHTTP (getRequest $ "http://" ++ restAddress ++ "/v2/keys" ++ urlext) >>= getResponseBody
+
+getFlexi :: (FromJSON a) => Etcd -> String -> IO (Maybe a)
+getFlexi etcd key = getFlexiRaw etcd key >>= extract
 
 -- | putRequest builds a put request for storing a particular value at a key
 putRequest :: String -> String -> Maybe (Request String)
