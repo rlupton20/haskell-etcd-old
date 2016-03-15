@@ -19,6 +19,10 @@ data EtcdPrevValue = EtcdPrevValue { etcdPrevValue :: String } deriving (Show)
 instance FromJSON EtcdPrevValue where
   parseJSON (Object v) = EtcdPrevValue <$> (v .: "prevNode" >>= (.: "value"))
 
+data EtcdModifiedIndex = EtcdModifiedIndex { etcdModifiedIndex :: Integer } deriving (Show)
+instance FromJSON EtcdModifiedIndex where
+  parseJSON (Object v) = EtcdModifiedIndex <$> (v .: "node" >>= (.: "modifiedIndex"))
+
 -- | extract is an internal utility function for parsing JSON data from
 --   etcd responses (hence its ridiculously restrictive type)
 extract :: (FromJSON a) => String -> IO (Maybe a)
