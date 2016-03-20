@@ -1,8 +1,10 @@
 # Text file editing nonsense
 *~
 *#
+*.swp
 
 # Haskell development stuff
 .cabal-sandbox
 cabal.sandbox.config
 dist
+.stack-work
