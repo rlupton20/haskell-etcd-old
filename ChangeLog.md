@@ -1,4 +1,4 @@
-# Revision history for Etcd
+# Revision history for haskell-etcd
 
 ## 0.1.0.0  -- YYYY-mm-dd
 
