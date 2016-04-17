@@ -17,8 +17,8 @@ extra-source-files:  README.md, ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Data.DHT, Data.DHT.Etcd
-  -- other-modules:       
+  exposed-modules:     Data.DHT.Etcd
+  other-modules:       Data.DHT.Etcd.Etcd, Data.DHT.Etcd.Internal, Data.DHT.Etcd.Basic, Data.DHT.Etcd.Parsers
   other-extensions:    RecordWildCards, OverloadedStrings
   build-depends:       base >=4.6 && < 5, HTTP >=4000.3 && <4000.4, aeson >=0.9 && <0.12, network-uri
   hs-source-dirs:      src/
